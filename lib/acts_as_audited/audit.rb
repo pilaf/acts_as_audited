@@ -13,7 +13,7 @@ module CollectiveIdea
       #
       class Audit < ActiveRecord::Base
         belongs_to :auditable, :polymorphic => true
-        belongs_to :user, :polymorphic => true
+        belongs_to :user, :class_name => 'User'
 
         before_create :set_version_number, :set_audit_user
 

@@ -4,7 +4,6 @@ class <%= class_name %> < ActiveRecord::Migration
       t.column :auditable_id, :integer
       t.column :auditable_type, :string
       t.column :user_id, :integer
-      t.column :user_type, :string
       t.column :username, :string
       t.column :action, :string
       t.column :changes, :text
@@ -14,7 +13,7 @@ class <%= class_name %> < ActiveRecord::Migration
     end
     
     add_index :audits, [:auditable_id, :auditable_type], :name => 'auditable_index'
-    add_index :audits, [:user_id, :user_type], :name => 'user_index'
+    add_index :audits, :user_id
     add_index :audits, :created_at  
   end
 
