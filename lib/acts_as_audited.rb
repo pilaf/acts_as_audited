@@ -110,7 +110,7 @@ module CollectiveIdea #:nodoc:
 
           write_inheritable_attribute :auditing_enabled, true
         end
-      end
+      end # ClassMethods
 
       module InstanceMethods
 
@@ -271,6 +271,21 @@ module CollectiveIdea #:nodoc:
           Audit.as_user( user, &block )
         end
 
+      end
+
+      module Configuration
+        @@audit_class_name = 'CollectiveIdea::Acts::Audited::Audit'
+        mattr_accessor :audit_class_name
+
+        @@user_class_name = 'User'
+        mattr_accessor :user_class_name
+
+        @@user_table_name = 'users'
+        mattr_accessor :user_table_name
+      end
+
+      def self.configure
+        yield Configuration
       end
     end
   end
