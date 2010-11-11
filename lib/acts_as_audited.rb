@@ -95,9 +95,9 @@ module CollectiveIdea #:nodoc:
             attr_accessible :audit_comment
           end
 
-          has_many :audits, :as => :auditable, :order => "#{Audit.quoted_table_name}.version"
+          has_many :audits, :as => :auditable, :order => "#{Audit.quoted_table_name}.version", :class_name => 'CollectiveIdea::Acts::Audited::Audit'
           attr_protected :audit_ids if options[:protect]
-          Audit.audited_class_names << self.to_s
+          CollectiveIdea::Acts::Audited::Audit.audited_class_names << self.to_s
 
           after_create  :audit_create if !options[:on] || (options[:on] && options[:on].include?(:create))
           before_update :audit_update if !options[:on] || (options[:on] && options[:on].include?(:update))
