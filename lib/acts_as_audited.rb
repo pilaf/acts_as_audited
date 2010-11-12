@@ -95,7 +95,7 @@ module ActsAsAudited #:nodoc:
 
       has_many :audits, :as => :auditable, :class_name => ActsAsAudited::Configuration.audit_class_name
       attr_protected :audit_ids if options[:protect]
-      ActsAsAudited::Audit.audited_class_names << self.to_s
+      ActsAsAudited.audit_class.audited_class_names << self.to_s
 
       after_create  :audit_create if !options[:on] || (options[:on] && options[:on].include?(:create))
       before_update :audit_update if !options[:on] || (options[:on] && options[:on].include?(:update))
