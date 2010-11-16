@@ -1,4 +1,5 @@
 require 'acts_as_audited'
+require 'acts_as_audited/audit'
 require 'acts_as_audited/audit_sweeper'
 
 #if Rails.env.development?
