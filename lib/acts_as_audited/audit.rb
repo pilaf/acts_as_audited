@@ -11,6 +11,7 @@ module ActsAsAudited
   #
   class Audit < ActiveRecord::Base
     belongs_to :auditable, :polymorphic => true
+    belongs_to :association, :polymorphic => true
     belongs_to :user, :class_name => ActsAsAudited::Configuration.user_class_name
 
     before_create :set_version_number, :set_audit_user
